@@ -1,9 +1,9 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "mirror-screen",
-  "title": "Mirror Screen",
-  "description": "",
-  "icon": "extension-icon.png",
+  "title": "Screen Mirroring",
+  "description": "Control macOS Screen Mirroring from Raycast. Discover available displays and toggle screen mirroring on/off with ease.",
+  "icon": "extension-icon-v3.png",
   "author": "CaffeineCat",
   "owner": "caffeinecat26",
   "license": "MIT",
@@ -11,8 +11,8 @@
     {
       "name": "mirror-screen",
       "title": "Mirror Screen",
-      "description": "",
-      "mode": "no-view"
+      "description": "Find and toggle screen mirroring to available displays via Control Center",
+      "mode": "view"
     }
   ],
   "dependencies": {
