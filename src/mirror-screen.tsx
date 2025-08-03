@@ -12,7 +12,8 @@ import {
 } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { useCachedState, createDeeplink } from "@raycast/utils";
-import { findScreenMirroringDisplays, toggleDisplayMirroring, type ScreenDisplay } from "./utils/screenMirror";
+import { findDisplays, type ScreenDisplay } from "./utils/findDisplays";
+import { toggleDisplay } from "./utils/toggleDisplay";
 
 interface Context {
   displayName?: string;
@@ -34,7 +35,7 @@ export default function Command({ launchContext }: { launchContext?: Context }) 
     if (foundDisplay) {
       (async function () {
         try {
-          const result = await toggleDisplayMirroring(foundDisplay.title);
+          const result = await toggleDisplay(foundDisplay.title);
 
           if (result.success) {
             const isToggleOff = foundDisplay.title.includes("(Currently Mirroring)");
@@ -73,7 +74,7 @@ export default function Command({ launchContext }: { launchContext?: Context }) 
     try {
       setIsLoading(true);
 
-      const result = await toggleDisplayMirroring(displayTitle);
+      const result = await toggleDisplay(displayTitle);
 
       if (result.success) {
         const isToggleOff = displayTitle.includes("(Currently Mirroring)");
@@ -107,11 +108,10 @@ export default function Command({ launchContext }: { launchContext?: Context }) 
     try {
       setIsLoading(true);
 
-      const displays = await findScreenMirroringDisplays();
+      const displays = await findDisplays();
+      setScreenList(displays);
 
       if (displays.length > 0) {
-        setScreenList(displays);
-
         showToast({
           style: Toast.Style.Success,
           title: "Screen Mirroring Menu Found!",
